@@ -30,8 +30,8 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/localstack:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/localstack:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/devopsdays:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/devopsdays:${{ github.sha }}
 
   deploy:
     name: Deploy to EC2
@@ -47,13 +47,13 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/localstack:latest
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/devopsdays:latest
 
-            docker stop localstack || true
-            docker rm localstack || true
+            docker stop devopsdays || true
+            docker rm devopsdays || true
 
             docker run -d \
-              --name localstack \
+              --name devopsdays \
               -p 8080:80 \
               --restart unless-stopped \
-              ${{ secrets.DOCKERHUB_USERNAME }}/localstack: latejar 
+              ${{ secrets.DOCKERHUB_USERNAME }}/devopsdays: latejar 
