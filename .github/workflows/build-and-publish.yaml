@@ -56,4 +56,4 @@ jobs:
               --name devopsdays \
               -p 8080:80 \
               --restart unless-stopped \
-              ${{ secrets.DOCKERHUB_USERNAME }}/devopsdays: latejar 
+              ${{ secrets.DOCKERHUB_USERNAME }}/devopsdays:latest
